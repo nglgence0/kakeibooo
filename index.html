@@ -1,0 +1,846 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="家計簿">
+<meta name="theme-color" content="#f0efee" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1819" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" href="data:image/png;base64,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">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}</style>
+<script>window.KAKEIBO_STANDALONE = true;</script>
+<title>家計簿</title>
+<style>
+/* Layout: quiet iOS-style ledger — a sticky top bar with the ＋ button, the "使えるお金" card, four tabs; entries open in a bottom sheet. */
+:root {
+  --bg: #f0efee;
+  --paper: #fafaf8;
+  --ink: #2f2c2d;
+  --muted: #8e8a8b;
+  --faint: #c2bfc0;
+  --line: #e2e0de;
+  --accent: #ab7584;
+  --accent-soft: #efe7e9;
+  --on-accent: #ffffff;
+  --seg-bg: #fdf8f9;
+  --income: #4f7fae;
+  --expense: #b25a6b;
+  --must: #5a5456;
+  --must-soft: #e7e4e4;
+  --wish: #ab7584;
+  --wish-soft: #efe7e9;
+  --warn: #a9762a;
+  --hero-bg: #fafaf8;
+  --hero-fg: #2f2c2d;
+  --hero-num: #2f2c2d;
+  --scrim: rgba(40, 34, 36, .35);
+  --font-display: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", sans-serif;
+  --font-body: var(--font-display);
+  --font-num: var(--font-display);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1a1819; --paper: #252223; --ink: #eeeaeb; --muted: #9d9799; --faint: #615c5e; --line: #353133;
+    --accent: #d39aaa; --accent-soft: #3a2c31; --on-accent: #1a1819; --seg-bg: #2c2729;
+    --income: #8fb4dc; --expense: #e3909f; --must: #d8d2d4; --must-soft: #332f31; --wish: #d39aaa; --wish-soft: #3a2c31; --warn: #dcae63;
+    --hero-bg: #252223; --hero-fg: #eeeaeb; --hero-num: #eeeaeb; --scrim: rgba(0, 0, 0, .55); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1a1819; --paper: #252223; --ink: #eeeaeb; --muted: #9d9799; --faint: #615c5e; --line: #353133;
+  --accent: #d39aaa; --accent-soft: #3a2c31; --on-accent: #1a1819; --seg-bg: #2c2729;
+  --income: #8fb4dc; --expense: #e3909f; --must: #d8d2d4; --must-soft: #332f31; --wish: #d39aaa; --wish-soft: #3a2c31; --warn: #dcae63;
+  --hero-bg: #252223; --hero-fg: #eeeaeb; --hero-num: #eeeaeb; --scrim: rgba(0, 0, 0, .55); color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 48px;
+  -webkit-font-smoothing: antialiased;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap { max-width: 680px; margin: 0 auto; display: grid; gap: 16px; }
+.num { font-family: var(--font-num); font-variant-numeric: tabular-nums; }
+h2 { font-weight: 600; font-size: 1rem; margin: 0; text-wrap: balance; }
+
+/* top bar */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 12px 4px; }
+.save { font-size: .76rem; color: var(--muted); }
+.add { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--accent); color: var(--on-accent); display: grid; place-items: center; cursor: pointer; box-shadow: 0 2px 8px color-mix(in srgb, var(--accent) 35%, transparent); }
+.add svg { width: 20px; height: 20px; }
+
+/* hero */
+.hero { background: var(--hero-bg); color: var(--hero-fg); border: 1px solid var(--line); border-radius: 14px; padding: 18px 18px 16px; display: grid; gap: 12px; }
+.hero .label { font-size: .8rem; color: var(--muted); }
+.hero .big { font-family: var(--font-num); font-variant-numeric: tabular-nums; font-size: clamp(2rem, 8.5vw, 2.6rem); font-weight: 600; line-height: 1.15; letter-spacing: -.01em; color: var(--hero-num); }
+.hero .big.neg { color: var(--expense); }
+.breakdown { display: grid; gap: 3px; font-size: .86rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px; }
+.breakdown div { display: flex; justify-content: space-between; gap: 12px; }
+.breakdown .num { color: var(--ink); }
+.breakdown .tot { font-weight: 600; color: var(--ink); border-top: 1px solid var(--line); padding-top: 4px; margin-top: 2px; }
+.month-sum { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.month-sum div { background: var(--bg); border-radius: 10px; padding: 7px 10px; min-width: 0; }
+.month-sum small { display: block; font-size: .7rem; color: var(--muted); }
+.month-sum b { font-family: var(--font-num); font-variant-numeric: tabular-nums; font-weight: 600; font-size: .92rem; }
+
+.banner { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; display: flex; gap: 10px; align-items: center; justify-content: space-between; flex-wrap: wrap; font-size: .86rem; }
+
+/* tabs (segmented, like the entry sheet) */
+.tabs { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--seg-bg); border: 1px solid var(--line); border-radius: 999px; padding: 4px; gap: 4px; }
+.tabs button { border: 0; background: transparent; color: var(--muted); font: 600 .88rem var(--font-body); padding: 8px 4px; border-radius: 999px; cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--accent-soft); color: var(--accent); }
+
+.panel { display: grid; gap: 14px; }
+.card { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: grid; gap: 12px; min-width: 0; }
+.hint { color: var(--muted); font-size: .8rem; margin: 0; }
+
+/* inline forms (予定・サブスク・設定) */
+form { display: grid; gap: 10px; }
+.row { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
+label { display: grid; gap: 4px; font-size: .78rem; color: var(--muted); }
+input, select { font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 9px 11px; width: 100%; min-width: 0; }
+input::placeholder, textarea::placeholder { color: var(--faint); }
+textarea { font: .75rem/1.5 ui-monospace, Menlo, monospace; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 9px 11px; width: 100%; min-width: 0; resize: vertical; }
+input:focus-visible, select:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.seg { display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; background: var(--seg-bg); border: 1px solid var(--line); border-radius: 999px; padding: 4px; gap: 4px; width: fit-content; }
+.seg button { border: 0; background: transparent; font: 600 .86rem var(--font-body); color: var(--muted); padding: 6px 16px; border-radius: 999px; cursor: pointer; white-space: nowrap; }
+.seg button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); }
+.btn { font: 600 .9rem var(--font-body); border: 0; border-radius: 999px; padding: 11px 18px; background: var(--accent); color: var(--on-accent); cursor: pointer; }
+.btn.ghost { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+.btn.small { padding: 5px 11px; font-size: .78rem; }
+.btn.danger { background: transparent; color: var(--expense); border: 1px solid var(--expense); }
+.x { border: 0; background: transparent; color: var(--muted); font-size: 1.1rem; cursor: pointer; padding: 2px 6px; border-radius: 6px; line-height: 1; }
+.x:hover { color: var(--expense); background: var(--bg); }
+
+/* lists */
+.list { display: grid; }
+.item { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); min-width: 0; }
+.item:last-child { border-bottom: 0; }
+.item .t { min-width: 0; }
+.item .t b { font-weight: 500; display: block; overflow-wrap: anywhere; }
+.item .t small { color: var(--muted); font-size: .76rem; }
+.amt { font-family: var(--font-num); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.amt.inc { color: var(--income); }
+.amt.exp { color: var(--expense); }
+.chip { display: inline-block; font-size: .68rem; font-weight: 600; padding: 1px 7px; border-radius: 999px; margin-left: 6px; vertical-align: 1px; }
+.chip.auto { background: var(--accent-soft); color: var(--accent); }
+.chip.must { background: var(--must-soft); color: var(--must); }
+.chip.wish { background: var(--wish-soft); color: var(--wish); }
+.chip.warn { background: color-mix(in srgb, var(--warn) 16%, transparent); color: var(--warn); }
+.chip.ok { background: color-mix(in srgb, var(--income) 14%, transparent); color: var(--income); }
+.monthnav { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.monthnav button { border: 0; background: var(--bg); color: var(--ink); border-radius: 50%; width: 34px; height: 34px; cursor: pointer; font-size: 1rem; }
+.empty { color: var(--muted); font-size: .86rem; text-align: center; padding: 18px 8px; }
+.acts { display: flex; gap: 6px; align-items: center; }
+.bar { height: 5px; background: var(--bg); border-radius: 999px; overflow: hidden; margin-top: 6px; }
+.bar i { display: block; height: 100%; background: var(--wish); border-radius: 999px; }
+.totals { display: flex; justify-content: space-between; gap: 10px; font-size: .86rem; flex-wrap: wrap; }
+
+/* calendar */
+.cal { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 3px; }
+.cal .wd { text-align: center; font-size: .7rem; font-weight: 600; color: var(--muted); padding-bottom: 2px; }
+.cal .wd.sun { color: var(--expense); }
+.cal .wd.sat { color: var(--income); }
+.day { min-height: 62px; min-width: 0; overflow: hidden; display: flex; flex-direction: column; gap: 1px; padding: 4px 3px; border-radius: 8px; border: 1px solid transparent; background: var(--bg); color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+.day[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); }
+.day .d { font-family: var(--font-num); font-variant-numeric: tabular-nums; font-size: .74rem; font-weight: 500; line-height: 1.6; width: 1.75em; text-align: center; border-radius: 999px; }
+.day.sun .d { color: var(--expense); }
+.day.sat .d { color: var(--income); }
+.day.today .d { background: var(--accent); color: var(--on-accent); font-weight: 600; }
+.day .i, .day .e, .day .p { font-family: var(--font-num); font-variant-numeric: tabular-nums; font-size: .6rem; line-height: 1.3; text-align: right; white-space: nowrap; overflow: hidden; }
+.day .i { color: var(--income); }
+.day .e { color: var(--expense); }
+.day .p { color: var(--must); font-size: .56rem; letter-spacing: -.02em; }
+.day .p b { margin-right: 0; padding: 0 1px; }
+.day .p b, .legend .pl { font-weight: 600; font-size: .58rem; background: var(--must-soft); color: var(--must); border-radius: 3px; padding: 0 2px; margin-right: 1px; }
+.day.has-plan { border-color: var(--faint); border-style: dashed; }
+.day.has-plan[aria-pressed="true"] { border-style: solid; border-color: var(--accent); }
+.linkbtn { border: 0; background: none; padding: 0; font: inherit; color: var(--accent); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+.day .dots { display: flex; gap: 3px; margin-top: auto; justify-content: flex-end; }
+.dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--must); }
+.dot.sub { background: var(--accent); }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: .72rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 5px; }
+.item.planned { opacity: .7; }
+.chip.plan { background: var(--bg); color: var(--muted); border: 1px dashed var(--line); }
+.confirm { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: .85rem; }
+
+/* entry sheet */
+.scrim { position: fixed; inset: 0; z-index: 20; background: var(--scrim); display: flex; align-items: flex-end; justify-content: center; }
+.sheet { width: 100%; max-width: 520px; max-height: calc(100% - env(safe-area-inset-top, 0px) - 24px); overflow-y: auto; background: var(--bg); border-radius: 16px 16px 0 0; display: block; gap: 0; }
+.sheet-head { position: sticky; top: 0; z-index: 1; background: var(--accent); padding: 16px max(16px, env(safe-area-inset-right, 0px)) 16px max(16px, env(safe-area-inset-left, 0px)); display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; }
+.sheet-head .seg { justify-self: center; background: var(--seg-bg); border: 0; padding: 5px; }
+.sheet-head .seg button { padding: 8px 18px; font-size: .95rem; }
+.sheet-head .seg button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); }
+.sheet-close { width: 36px; height: 36px; border: 0; border-radius: 50%; background: transparent; color: var(--on-accent); font-size: 1.4rem; line-height: 1; cursor: pointer; }
+.sheet-body { display: grid; gap: 26px; padding: 26px 0 calc(28px + env(safe-area-inset-bottom, 0px)); }
+.group { background: var(--paper); border-block: 1px solid var(--line); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.group .amount { -moz-appearance: textfield; outline: none; }
+.group .amount::-webkit-outer-spin-button, .group .amount::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.group:focus-within { border-color: var(--accent); }
+.group .amount { border: 0; background: transparent; border-radius: 0; padding: 14px 0; font-size: 1.5rem; font-variant-numeric: tabular-nums; }
+.cell { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 12px; min-height: 52px; font-size: 1rem; color: var(--ink); border-bottom: 1px solid var(--line); }
+.cell:last-child { border-bottom: 0; }
+.cell input, .cell select { border: 0; background: transparent; padding: 12px 0; text-align: right; text-align-last: right; color: var(--muted); border-radius: 0; -webkit-appearance: none; appearance: none; }
+.cell input[type="date"] { justify-self: end; width: auto; }
+.cell input[type="date"]::-webkit-date-and-time-value { text-align: right; }
+.sheet .hint { padding-inline: max(16px, env(safe-area-inset-left, 0px)); margin-top: -14px; }
+.sheet .save-btn { justify-self: center; width: min(75%, 360px); padding: 15px; font-size: 1.05rem; box-shadow: 0 3px 10px color-mix(in srgb, var(--accent) 30%, transparent); }
+@media (prefers-reduced-motion: no-preference) {
+  .tabs button, .btn, .seg button { transition: background .15s, color .15s; }
+  .scrim:not([hidden]) .sheet { animation: up .22s ease-out; }
+  @keyframes up { from { transform: translateY(40px); opacity: .6; } to { transform: none; opacity: 1; } }
+}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <div class="top">
+    <span class="save" id="saveState"></span>
+    <button class="add" id="openAdd" type="button" aria-label="記録を追加">
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M10 3v14M3 10h14"/></svg>
+    </button>
+  </div>
+
+  <section class="hero" aria-label="今つかえるお金">
+    <div>
+      <div class="label">今つかえるお金</div>
+      <div class="big" id="freeAmt">¥0</div>
+    </div>
+    <div class="breakdown" id="breakdown"></div>
+    <div class="month-sum" id="monthSum"></div>
+  </section>
+
+  <div class="banner" id="sampleBanner" hidden>
+    <span>いま表示しているのは<b>サンプルデータ</b>です。</span>
+    <button class="btn small" id="clearSample">サンプルを消して始める</button>
+  </div>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-tab="log" aria-selected="true">記録</button>
+    <button role="tab" data-tab="plan" aria-selected="false">予定</button>
+    <button role="tab" data-tab="subs" aria-selected="false">サブスク</button>
+    <button role="tab" data-tab="settings" aria-selected="false">設定</button>
+  </nav>
+
+  <!-- 記録 -->
+  <section class="panel" data-panel="log">
+    <div class="card">
+      <div class="monthnav">
+        <button type="button" id="prevM" aria-label="前の月">‹</button>
+        <h2 id="mLabel"></h2>
+        <button type="button" id="nextM" aria-label="次の月">›</button>
+      </div>
+      <div class="totals" id="mTotals"></div>
+      <div class="cal" id="cal"></div>
+      <div class="legend"><span><b class="pl">予</b>必須の予定</span><span><i class="dot sub"></i>サブスク引き落とし予定</span></div>
+    </div>
+    <div class="card">
+      <div class="totals"><h2 id="dayLabel"></h2><span class="amt" id="dayNet"></span></div>
+      <div class="totals" id="daySum"></div>
+      <div class="list" id="txList"></div>
+    </div>
+  </section>
+
+  <!-- 予定 -->
+  <section class="panel" data-panel="plan" hidden>
+    <div class="card">
+      <h2>これからの出費を登録する</h2>
+      <form id="planForm">
+        <div class="seg" id="planKind">
+          <button type="button" class="must" data-v="must" aria-pressed="true">必須</button>
+          <button type="button" class="wish" data-v="wish" aria-pressed="false">ほしいもの</button>
+        </div>
+        <p class="hint" id="planHint"></p>
+        <div class="row">
+          <label>なに？<input id="planName" type="text" required placeholder="京都旅行"></label>
+          <label>金額（円）<input id="planAmount" type="number" inputmode="numeric" min="1" required placeholder="40000"></label>
+        </div>
+        <div class="row">
+          <label id="planDateLabel">いつまでに<input id="planDate" type="date"></label>
+        </div>
+        <button class="btn" type="submit">追加する</button>
+      </form>
+    </div>
+    <div class="card">
+      <div class="totals"><h2>必須の予定</h2><span class="amt" id="mustTotal"></span></div>
+      <p class="hint">「今つかえるお金」からあらかじめ差し引いています。払ったら「払った」を押すと支出として記録されます。</p>
+      <div class="list" id="mustList"></div>
+    </div>
+    <div class="card">
+      <div class="totals"><h2>ほしいものリスト</h2><span class="amt" id="wishTotal"></span></div>
+      <p class="hint">今つかえるお金と比べて、買えるかどうかを表示します。こちらは差し引いていません。</p>
+      <div class="list" id="wishList"></div>
+    </div>
+  </section>
+
+  <!-- サブスク -->
+  <section class="panel" data-panel="subs" hidden>
+    <div class="card">
+      <h2>サブスクを登録する</h2>
+      <p class="hint">一度登録すれば、毎月の支払日に自動で支出に入ります。</p>
+      <form id="subForm">
+        <div class="row">
+          <label>サービス名<input id="subName" type="text" required placeholder="Netflix"></label>
+          <label>月額（円）<input id="subAmount" type="number" inputmode="numeric" min="1" required placeholder="1490"></label>
+        </div>
+        <div class="row">
+          <label>毎月の支払日<select id="subDay"></select></label>
+          <label>カテゴリ<select id="subCat"></select></label>
+        </div>
+        <button class="btn" type="submit">登録する</button>
+      </form>
+    </div>
+    <div class="card">
+      <div class="totals"><h2>登録中のサブスク</h2><span id="subTotal" class="amt"></span></div>
+      <div class="list" id="subList"></div>
+    </div>
+  </section>
+
+  <!-- 設定 -->
+  <section class="panel" data-panel="settings" hidden>
+    <div class="card">
+      <h2>はじめの残高</h2>
+      <p class="hint">使い始めた日の手持ち（口座＋財布）の合計を入れてください。ここに記録した収支を足し引きして、今の残高を出します。</p>
+      <form id="balForm">
+        <div class="row">
+          <label>金額（円）<input id="balAmount" type="number" inputmode="numeric" required></label>
+          <label>&nbsp;<button class="btn" type="submit">保存する</button></label>
+        </div>
+      </form>
+    </div>
+    <div class="card">
+      <h2>計算のしくみ</h2>
+      <p class="hint">今つかえるお金 ＝ 今の残高 − 必須の予定（まだ払っていないもの）− 今月これから引き落とされるサブスク</p>
+      <p class="hint">今の残高 ＝ はじめの残高 ＋ 収入 − 支出 − これまでのサブスク（今日までの分）</p>
+    </div>
+    <div class="card">
+      <h2>バックアップ</h2>
+      <p class="hint">記録をまるごと文字にして書き出せます。メモアプリなどに貼って取っておけば、別の家計簿に移したり、消えたときに戻したりできます。</p>
+      <div class="acts">
+        <button class="btn small" id="exportBtn" type="button">書き出す</button>
+        <button class="btn small ghost" id="downloadBtn" type="button" hidden>ファイルに保存</button>
+        <button class="btn small ghost" id="importBtn" type="button">読み込む</button>
+      </div>
+      <textarea id="backupText" rows="5" hidden spellcheck="false"></textarea>
+      <p class="hint" id="backupMsg"></p>
+      <div id="importArea" hidden><button class="btn small danger" id="importDo" type="button">このデータで上書きする</button></div>
+    </div>
+    <div class="card">
+      <h2>データをリセット</h2>
+      <div id="resetArea"><button class="btn danger" id="resetBtn" type="button">すべて消す</button></div>
+    </div>
+  </section>
+</div>
+
+<div class="scrim" id="sheet" hidden>
+  <form class="sheet" id="txForm" role="dialog" aria-modal="true" aria-label="記録を追加">
+    <div class="sheet-head">
+      <button type="button" class="sheet-close" id="closeAdd" aria-label="閉じる">×</button>
+      <div class="seg" id="txKind">
+        <button type="button" data-v="expense" aria-pressed="true">支出</button>
+        <button type="button" data-v="income" aria-pressed="false">収入</button>
+        <button type="button" data-v="must" aria-pressed="false">予定</button>
+      </div>
+      <span></span>
+    </div>
+    <div class="sheet-body">
+      <div class="group"><input class="amount" id="txAmount" type="number" inputmode="numeric" min="1" required placeholder="金額" aria-label="金額（円）"></div>
+      <div class="group">
+        <label class="cell" id="txCatWrap"><span>カテゴリー</span><select id="txCat"></select></label>
+        <label class="cell"><span id="memoLabel">メモ</span><input id="txMemo" type="text" placeholder="品目やお店"></label>
+        <label class="cell"><span>日付</span><input id="txDate" type="date" required></label>
+      </div>
+      <p class="hint" id="txHint" hidden>この日が期限の必須の出費として登録します。「予定」タブにも入り、今つかえるお金から差し引かれます。</p>
+      <button class="btn save-btn" type="submit" id="txSubmit">保存</button>
+    </div>
+  </form>
+</div>
+
+<script>
+(() => {
+  const EXP_CATS = ["食費", "外食・カフェ", "日用品", "美容・コスメ", "服", "交通", "交際費", "趣味", "サブスク", "勉強・就活", "その他"];
+  const INC_CATS = ["バイト代", "インターン", "仕送り", "臨時収入", "その他"];
+  const $ = (id) => document.getElementById(id);
+  const yen = (n) => (n < 0 ? "−¥" : "¥") + Math.abs(Math.round(n)).toLocaleString("ja-JP");
+  const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+  const pad = (n) => String(n).padStart(2, "0");
+  const ymd = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  const ym = (d) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}`;
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const TODAY = ymd(today), THIS_M = ym(today);
+  const daysIn = (y, m) => new Date(y, m, 0).getDate();
+  const addMonth = (m, k) => { const [y, mo] = m.split("-").map(Number); const d = new Date(y, mo - 1 + k, 1); return ym(d); };
+  const mLabel = (m) => { const [y, mo] = m.split("-").map(Number); return `${y}年${mo}月`; };
+  const dLabel = (s) => { const [y, m, d] = s.split("-").map(Number); const w = "日月火水木金土"[new Date(y, m - 1, d).getDay()]; return `${m}/${d}（${w}）`; };
+  const daysUntil = (s) => Math.round((new Date(s + "T00:00:00") - today) / 86400000);
+
+  function sampleState() {
+    const d = (off) => { const x = new Date(today); x.setDate(x.getDate() + off); return ymd(x); };
+    const nextM = addMonth(THIS_M, 1);
+    return {
+      sample: true,
+      startBalance: 120000,
+      tx: [
+        { id: uid(), kind: "income", amount: 68000, cat: "バイト代", memo: "居酒屋バイト（例）", date: d(-12) },
+        { id: uid(), kind: "expense", amount: 980, cat: "外食・カフェ", memo: "ランチ（例）", date: d(-2) },
+        { id: uid(), kind: "expense", amount: 3200, cat: "美容・コスメ", memo: "リップ（例）", date: d(-5) },
+        { id: uid(), kind: "expense", amount: 2400, cat: "食費", memo: "スーパー（例）", date: d(-1) },
+      ],
+      subs: [
+        { id: uid(), name: "Netflix（例）", amount: 1490, day: 25, cat: "サブスク", start: THIS_M, end: null },
+        { id: uid(), name: "Spotify（例）", amount: 580, day: 3, cat: "サブスク", start: THIS_M, end: null },
+      ],
+      plans: [
+        { id: uid(), type: "must", name: "旅行の積立（例）", amount: 40000, date: d(30) },
+        { id: uid(), type: "must", name: "スーツ（例）", amount: 25000, date: d(14) },
+        { id: uid(), type: "wish", name: "新しいコート（例）", amount: 18000, date: "" },
+        { id: uid(), type: "wish", name: "ワイヤレスイヤホン（例）", amount: 39800, date: "" },
+      ],
+    };
+  }
+  const emptyState = () => ({ sample: false, startBalance: 0, tx: [], subs: [], plans: [] });
+
+  let S = sampleState();
+  let viewMonth = THIS_M;
+  let selDay = TODAY;
+  function selectDay(d) {
+    selDay = d; viewMonth = d.slice(0, 7);
+    $("txDate").value = d;
+    renderLog();
+  }
+  let txKind = "expense", planKind = "must";
+
+  /* ---------- 保存 ---------- */
+  let ref = null, saving = false, pending = false, timer = null;
+  const LS_KEY = "mayu-kakeibo-v1";
+  function setSave(t) { $("saveState").textContent = t; }
+  function persist() {
+    clearTimeout(timer);
+    timer = setTimeout(flush, 400);
+  }
+  async function flush() {
+    const body = JSON.parse(JSON.stringify({ state: S }));
+    if (!ref) {
+      try { localStorage.setItem(LS_KEY, JSON.stringify(S)); setSave("この端末に保存しました"); } catch { setSave("保存できない環境です"); }
+      return;
+    }
+    if (saving) { pending = true; return; }
+    saving = true; setSave("保存中…");
+    try { await ref.set(body); setSave("保存しました"); }
+    catch (e) { setSave(e && e.code === "quota_exceeded" ? "容量がいっぱいで保存できません" : "保存できませんでした。もう一度操作してください"); }
+    saving = false;
+    if (pending) { pending = false; flush(); }
+  }
+  function commit() { render(); persist(); }
+
+  /* ---------- 計算 ---------- */
+  function subCharges(upTo) {
+    // 今日（upTo）までに発生したサブスク支払いを列挙
+    const out = [];
+    for (const s of S.subs) {
+      let m = s.start;
+      const last = s.end && s.end < ym(upTo) ? s.end : ym(upTo);
+      let guard = 0;
+      while (m <= last && guard++ < 600) {
+        const [y, mo] = m.split("-").map(Number);
+        const day = Math.min(s.day, daysIn(y, mo));
+        const date = `${m}-${pad(day)}`;
+        if (date <= ymd(upTo)) out.push({ id: "sub-" + s.id + "-" + m, kind: "expense", amount: s.amount, cat: s.cat || "サブスク", memo: s.name, date, auto: true });
+        m = addMonth(m, 1);
+      }
+    }
+    return out;
+  }
+  function subChargesInMonth(m) {
+    const [y, mo] = m.split("-").map(Number);
+    return S.subs.filter((s) => s.start <= m && (!s.end || s.end >= m)).map((s) => {
+      const date = `${m}-${pad(Math.min(s.day, daysIn(y, mo)))}`;
+      return { id: "sub-" + s.id + "-" + m, kind: "expense", amount: s.amount, cat: s.cat || "サブスク", memo: s.name, date, auto: true };
+    });
+  }
+  function compute() {
+    const past = S.tx.filter((t) => t.date <= TODAY);
+    const inc = past.filter((t) => t.kind === "income").reduce((a, t) => a + t.amount, 0);
+    const exp = past.filter((t) => t.kind === "expense").reduce((a, t) => a + t.amount, 0);
+    const subPaid = subCharges(today).reduce((a, t) => a + t.amount, 0);
+    const balance = S.startBalance + inc - exp - subPaid;
+    const musts = S.plans.filter((p) => p.type === "must");
+    const mustSum = musts.reduce((a, p) => a + p.amount, 0);
+    const subUpcoming = subChargesInMonth(THIS_M).filter((t) => t.date > TODAY).reduce((a, t) => a + t.amount, 0);
+    const free = balance - mustSum - subUpcoming;
+    return { balance, mustSum, mustCount: musts.length, subUpcoming, free };
+  }
+  function monthRows(m) {
+    const rows = S.tx.filter((t) => t.date.startsWith(m)).concat(subChargesInMonth(m).filter((t) => t.date <= TODAY));
+    return rows.sort((a, b) => b.date.localeCompare(a.date));
+  }
+
+  /* ---------- 描画 ---------- */
+  function el(tag, attrs = {}, ...kids) {
+    const e = document.createElement(tag);
+    for (const [k, v] of Object.entries(attrs)) {
+      if (k === "class") e.className = v; else if (k.startsWith("on")) e.addEventListener(k.slice(2), v); else e.setAttribute(k, v);
+    }
+    for (const c of kids.flat()) if (c != null) e.append(c.nodeType ? c : document.createTextNode(c));
+    return e;
+  }
+  function render() {
+    const c = compute();
+    $("freeAmt").textContent = yen(c.free);
+    $("freeAmt").classList.toggle("neg", c.free < 0);
+    $("breakdown").replaceChildren(
+      el("div", {}, el("span", {}, "今の残高"), el("span", { class: "num" }, yen(c.balance))),
+      el("div", {}, el("span", {}, `− 必須の予定（${c.mustCount}件）`), el("span", { class: "num" }, yen(c.mustSum))),
+      el("div", {}, el("span", {}, "− 今月これからのサブスク"), el("span", { class: "num" }, yen(c.subUpcoming))),
+      el("div", { class: "tot" }, el("span", {}, "＝ 今つかえるお金"), el("span", { class: "num" }, yen(c.free)))
+    );
+    const rows = monthRows(THIS_M);
+    const mi = rows.filter((t) => t.kind === "income").reduce((a, t) => a + t.amount, 0);
+    const me = rows.filter((t) => t.kind === "expense").reduce((a, t) => a + t.amount, 0);
+    $("monthSum").replaceChildren(
+      el("div", {}, el("small", {}, "今月の収入"), el("b", {}, yen(mi))),
+      el("div", {}, el("small", {}, "今月の支出"), el("b", {}, yen(me))),
+      el("div", {}, el("small", {}, "今月の収支"), el("b", {}, yen(mi - me)))
+    );
+    $("sampleBanner").hidden = !S.sample;
+    renderLog(); renderPlans(c); renderSubs();
+    $("balAmount").value = S.startBalance;
+  }
+  const short = (n) => n >= 100000 ? (Math.round(n / 1000) / 10).toLocaleString("ja-JP") + "万" : n.toLocaleString("ja-JP");
+  const sumKind = (rows, k) => rows.filter((t) => t.kind === k).reduce((a, t) => a + t.amount, 0);
+  function plannedOn(d) {
+    // その日に予定されている、まだ起きていない出費（サブスク・必須の予定）
+    const out = [];
+    if (d > TODAY) for (const t of subChargesInMonth(d.slice(0, 7))) if (t.date === d) out.push({ ...t, plan: "sub" });
+    for (const p of S.plans) if (p.type === "must" && p.date === d) out.push({ id: p.id, kind: "expense", amount: p.amount, cat: "必須の予定", memo: p.name, date: d, plan: "must" });
+    return out;
+  }
+  function renderLog() {
+    $("mLabel").textContent = mLabel(viewMonth);
+    const rows = monthRows(viewMonth);
+    const mi = sumKind(rows, "income"), me = sumKind(rows, "expense");
+    const [vy, vm] = viewMonth.split("-").map(Number);
+    const dim = daysIn(vy, vm);
+    const elapsed = viewMonth < THIS_M ? dim : viewMonth === THIS_M ? today.getDate() : 0;
+    $("mTotals").replaceChildren(
+      el("span", {}, "収入 ", el("span", { class: "amt inc" }, yen(mi))),
+      el("span", {}, "支出 ", el("span", { class: "amt exp" }, yen(me))),
+      ...(elapsed ? [el("span", {}, "1日平均の支出 ", el("span", { class: "amt" }, yen(me / elapsed)))] : [])
+    );
+
+    // カレンダー
+    const cal = $("cal"); cal.replaceChildren();
+    "日月火水木金土".split("").forEach((w, i) => cal.append(el("div", { class: "wd" + (i === 0 ? " sun" : i === 6 ? " sat" : "") }, w)));
+    const first = new Date(vy, vm - 1, 1).getDay();
+    for (let i = 0; i < first; i++) cal.append(el("div"));
+    for (let d = 1; d <= dim; d++) {
+      const date = `${viewMonth}-${pad(d)}`;
+      const dr = rows.filter((t) => t.date === date);
+      const di = sumKind(dr, "income"), de = sumKind(dr, "expense");
+      const plans = plannedOn(date);
+      const mustAmt = plans.filter((p) => p.plan === "must").reduce((a, p) => a + p.amount, 0);
+      const subs = plans.filter((p) => p.plan === "sub");
+      const wd = (first + d - 1) % 7;
+      const cls = ["day", wd === 0 ? "sun" : wd === 6 ? "sat" : "", date === TODAY ? "today" : "", mustAmt ? "has-plan" : ""].join(" ");
+      const label = `${dLabel(date)} 収入${di}円 支出${de}円` + (mustAmt ? ` 必須の予定${mustAmt}円` : "") + (subs.length ? ` サブスク${subs.length}件` : "");
+      cal.append(el("button", { type: "button", class: cls, "aria-pressed": String(date === selDay), "aria-label": label, onclick: () => selectDay(date) },
+        el("span", { class: "d" }, String(d)),
+        di ? el("span", { class: "i" }, "+" + short(di)) : null,
+        de ? el("span", { class: "e" }, "−" + short(de)) : null,
+        mustAmt ? el("span", { class: "p" }, el("b", {}, "予"), mustAmt >= 10000 ? (Math.round(mustAmt / 1000) / 10).toLocaleString("ja-JP") + "万" : mustAmt.toLocaleString("ja-JP")) : null,
+        subs.length ? el("span", { class: "dots" }, subs.map(() => el("i", { class: "dot sub" }))) : null));
+    }
+    renderDay();
+  }
+  function renderDay() {
+    const d = selDay;
+    $("dayLabel").textContent = dLabel(d) + (d === TODAY ? " 今日" : "");
+    const rows = monthRows(d.slice(0, 7)).filter((t) => t.date === d);
+    const di = sumKind(rows, "income"), de = sumKind(rows, "expense");
+    $("dayNet").textContent = "収支 " + (di - de > 0 ? "+" : "") + yen(di - de);
+    $("dayNet").className = "amt " + (di - de > 0 ? "inc" : di - de < 0 ? "exp" : "");
+    $("daySum").replaceChildren(
+      el("span", {}, "収入 ", el("span", { class: "amt inc" }, yen(di))),
+      el("span", {}, "支出 ", el("span", { class: "amt exp" }, yen(de))));
+    const list = $("txList"); list.replaceChildren();
+    const plans = plannedOn(d);
+    if (!rows.length && !plans.length) { list.append(el("div", { class: "empty" }, "この日の記録はまだありません。下のフォームから追加してね。")); }
+    for (const p of plans) {
+      if (p.plan === "sub") {
+        list.append(el("div", { class: "item planned" },
+          el("div", { class: "t" }, el("b", {}, p.memo, el("span", { class: "chip plan" }, "引き落とし予定")), el("small", {}, p.cat)),
+          el("span", { class: "amt" }, yen(p.amount)),
+          el("span", {})));
+        continue;
+      }
+      const plan = S.plans.find((x) => x.id === p.id);
+      const chip = d < TODAY ? el("span", { class: "chip warn" }, "期限すぎ") : el("span", { class: "chip must" }, "必須の予定");
+      list.append(el("div", { class: "item" },
+        el("div", { class: "t" }, el("b", {}, p.memo, chip), el("small", {}, "まだ払っていません")),
+        el("span", { class: "amt" }, yen(p.amount)),
+        el("div", { class: "acts" },
+          el("button", { class: "btn small ghost", type: "button", onclick: () => payPlan(plan) }, "払った"),
+          el("button", { class: "x", type: "button", "aria-label": "予定を削除", onclick: () => { S.plans = S.plans.filter((x) => x.id !== p.id); commit(); } }, "×"))));
+    }
+    for (const t of rows) {
+      const del = t.auto ? el("span", { class: "x", "aria-hidden": "true" }, "") :
+        el("button", { class: "x", type: "button", "aria-label": "削除", onclick: () => { S.tx = S.tx.filter((x) => x.id !== t.id); commit(); } }, "×");
+      list.append(el("div", { class: "item" },
+        el("div", { class: "t" }, el("b", {}, t.memo || t.cat, t.auto ? el("span", { class: "chip auto" }, "自動") : null), el("small", {}, t.cat)),
+        el("span", { class: "amt " + (t.kind === "income" ? "inc" : "exp") }, (t.kind === "income" ? "+" : "−") + yen(t.amount).replace("¥", "¥")),
+        del));
+    }
+  }
+  function renderPlans(c) {
+    const musts = S.plans.filter((p) => p.type === "must").sort((a, b) => (a.date || "9999").localeCompare(b.date || "9999"));
+    const wishes = S.plans.filter((p) => p.type === "wish");
+    $("mustTotal").textContent = "合計 " + yen(musts.reduce((a, p) => a + p.amount, 0));
+    $("wishTotal").textContent = "合計 " + yen(wishes.reduce((a, p) => a + p.amount, 0));
+    const ml = $("mustList"); ml.replaceChildren();
+    if (!musts.length) ml.append(el("div", { class: "empty" }, "旅行や絶対に買うものなど、避けられない出費を登録してね。"));
+    for (const p of musts) {
+      let chip = null;
+      if (p.date) {
+        const n = daysUntil(p.date);
+        chip = n < 0 ? el("span", { class: "chip warn" }, "期限すぎ") : el("span", { class: "chip must" }, n === 0 ? "今日" : `あと${n}日`);
+      }
+      ml.append(el("div", { class: "item" },
+        el("div", { class: "t" }, el("b", {}, p.name, chip),
+          el("small", {}, p.date
+            ? el("button", { class: "linkbtn", type: "button", onclick: () => { showTab("log"); selectDay(p.date); } }, dLabel(p.date) + " まで・カレンダーで見る")
+            : "日付なし（日付を入れるとカレンダーに出ます）")),
+        el("span", { class: "amt" }, yen(p.amount)),
+        el("div", { class: "acts" },
+          el("button", { class: "btn small ghost", type: "button", onclick: () => payPlan(p) }, "払った"),
+          el("button", { class: "x", type: "button", "aria-label": "削除", onclick: () => { S.plans = S.plans.filter((x) => x.id !== p.id); commit(); } }, "×"))));
+    }
+    const wl = $("wishList"); wl.replaceChildren();
+    if (!wishes.length) wl.append(el("div", { class: "empty" }, "ほしいものと金額を書いておくと、今買えるかがわかります。"));
+    for (const p of wishes) {
+      const ok = c.free >= p.amount;
+      const ratio = c.free <= 0 ? 0 : Math.min(1, c.free / p.amount);
+      const bar = el("div", { class: "bar" }, el("i", { style: `width:${Math.round(ratio * 100)}%` }));
+      wl.append(el("div", { class: "item" },
+        el("div", { class: "t" },
+          el("b", {}, p.name, ok ? el("span", { class: "chip ok" }, "今買える") : el("span", { class: "chip wish" }, "あと " + yen(p.amount - Math.max(0, c.free)))),
+          ok ? el("small", {}, "買ったら残り " + yen(c.free - p.amount)) : el("small", {}, "今つかえるお金に対して " + Math.round(ratio * 100) + "%"),
+          bar),
+        el("span", { class: "amt" }, yen(p.amount)),
+        el("div", { class: "acts" },
+          el("button", { class: "btn small ghost", type: "button", onclick: () => payPlan(p) }, "買った"),
+          el("button", { class: "x", type: "button", "aria-label": "削除", onclick: () => { S.plans = S.plans.filter((x) => x.id !== p.id); commit(); } }, "×"))));
+    }
+  }
+  function payPlan(p) {
+    S.tx.push({ id: uid(), kind: "expense", amount: p.amount, cat: p.type === "wish" ? "趣味" : "その他", memo: p.name, date: TODAY });
+    S.plans = S.plans.filter((x) => x.id !== p.id);
+    commit();
+  }
+  function renderSubs() {
+    const active = S.subs.filter((s) => !s.end || s.end >= THIS_M);
+    const sum = active.reduce((a, s) => a + s.amount, 0);
+    $("subTotal").textContent = `月 ${yen(sum)}（年 ${yen(sum * 12)}）`;
+    const list = $("subList"); list.replaceChildren();
+    if (!S.subs.length) list.append(el("div", { class: "empty" }, "動画・音楽・アプリなど、毎月払っているものを登録してね。"));
+    for (const s of S.subs) {
+      const ended = s.end && s.end < addMonth(THIS_M, 1) && s.end !== null;
+      const status = s.end ? el("span", { class: "chip warn" }, `${mLabel(s.end)}で解約`) : el("span", { class: "chip auto" }, "毎月" + s.day + "日");
+      list.append(el("div", { class: "item" },
+        el("div", { class: "t" }, el("b", {}, s.name, status), el("small", {}, `${mLabel(s.start)}から`)),
+        el("span", { class: "amt" }, yen(s.amount)),
+        el("div", { class: "acts" },
+          s.end ? el("button", { class: "btn small ghost", type: "button", onclick: () => { s.end = null; commit(); } }, "再開")
+                : el("button", { class: "btn small ghost", type: "button", onclick: () => { s.end = THIS_M; commit(); } }, "解約"),
+          el("button", { class: "x", type: "button", "aria-label": "削除（過去分も消えます）", title: "削除すると過去の支払い記録も消えます", onclick: () => { S.subs = S.subs.filter((x) => x.id !== s.id); commit(); } }, "×"))));
+    }
+  }
+
+  /* ---------- フォーム ---------- */
+  function fillCats() {
+    const cats = txKind === "income" ? INC_CATS : EXP_CATS;
+    $("txCat").replaceChildren(...cats.map((c) => el("option", { value: c }, c)));
+  }
+  function seg(id, onPick) {
+    $(id).addEventListener("click", (e) => {
+      const b = e.target.closest("button"); if (!b) return;
+      for (const x of $(id).querySelectorAll("button")) x.setAttribute("aria-pressed", String(x === b));
+      onPick(b.dataset.v);
+    });
+  }
+  seg("txKind", (v) => {
+    txKind = v; fillCats();
+    const must = v === "must";
+    $("txCatWrap").hidden = must;
+    $("txHint").hidden = !must;
+    $("txMemo").required = must;
+    $("txMemo").placeholder = must ? "旅行、スーツなど" : "品目やお店";
+    $("memoLabel").textContent = must ? "なに？" : "メモ";
+    $("txSubmit").textContent = must ? "予定に追加" : "保存";
+  });
+  seg("planKind", (v) => { planKind = v; planUI(); });
+  function planUI() {
+    $("planHint").textContent = planKind === "must"
+      ? "旅行・就活のスーツ・学費など、絶対に必要な出費。今つかえるお金から先に差し引きます。"
+      : "ほしいものと値段のメモ。今つかえるお金で買えるかがわかります。";
+    $("planDateLabel").firstChild.textContent = planKind === "must" ? "いつまでに" : "目安の時期（なくてもOK）";
+    $("planName").placeholder = planKind === "must" ? "京都旅行" : "新しいコート";
+  }
+  fillCats(); planUI();
+  $("subDay").replaceChildren(...Array.from({ length: 31 }, (_, i) => el("option", { value: i + 1 }, `${i + 1}日`)));
+  $("subDay").value = String(today.getDate());
+  $("subCat").replaceChildren(...EXP_CATS.map((c) => el("option", { value: c }, c)));
+  $("subCat").value = "サブスク";
+  $("txDate").value = TODAY;
+
+  $("txForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const amount = Math.round(Number($("txAmount").value)); if (!(amount > 0)) return;
+    if (txKind === "must") S.plans.push({ id: uid(), type: "must", name: $("txMemo").value.trim(), amount, date: $("txDate").value || TODAY });
+    else S.tx.push({ id: uid(), kind: txKind, amount, cat: $("txCat").value, memo: $("txMemo").value.trim(), date: $("txDate").value || TODAY });
+    selDay = $("txDate").value || TODAY; viewMonth = selDay.slice(0, 7);
+    $("txAmount").value = ""; $("txMemo").value = "";
+    commit();
+    closeSheet();
+  });
+  function openSheet() {
+    $("txDate").value = selDay || TODAY;
+    $("sheet").hidden = false;
+    document.documentElement.style.overflow = "hidden";
+    setTimeout(() => $("txAmount").focus(), 60);
+  }
+  function closeSheet() {
+    if ($("sheet").hidden) return;
+    $("sheet").hidden = true;
+    document.documentElement.style.overflow = "";
+    $("openAdd").focus();
+  }
+  $("openAdd").addEventListener("click", openSheet);
+  $("closeAdd").addEventListener("click", closeSheet);
+  $("sheet").addEventListener("click", (e) => { if (e.target === $("sheet")) closeSheet(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeSheet(); });
+  $("txDate").addEventListener("change", () => { if ($("txDate").value) selectDay($("txDate").value); });
+  $("planForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const amount = Math.round(Number($("planAmount").value)); if (!(amount > 0)) return;
+    S.plans.push({ id: uid(), type: planKind, name: $("planName").value.trim(), amount, date: $("planDate").value || "" });
+    $("planName").value = ""; $("planAmount").value = ""; $("planDate").value = "";
+    commit();
+  });
+  $("subForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const amount = Math.round(Number($("subAmount").value)); if (!(amount > 0)) return;
+    const day = Number($("subDay").value);
+    // 今月の支払日がもう過ぎていたら、今の残高に反映済みとみなして来月から数える
+    const start = day < today.getDate() ? addMonth(THIS_M, 1) : THIS_M;
+    S.subs.push({ id: uid(), name: $("subName").value.trim(), amount, day, cat: $("subCat").value, start, end: null });
+    $("subName").value = ""; $("subAmount").value = "";
+    commit();
+  });
+  $("balForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    S.startBalance = Math.round(Number($("balAmount").value) || 0);
+    commit();
+  });
+  const monthStart = (m) => (m === THIS_M ? TODAY : `${m}-01`);
+  $("prevM").addEventListener("click", () => selectDay(monthStart(addMonth(viewMonth, -1))));
+  $("nextM").addEventListener("click", () => selectDay(monthStart(addMonth(viewMonth, 1))));
+  $("clearSample").addEventListener("click", () => { S = emptyState(); commit(); showTab("settings"); $("balAmount").focus(); });
+  function askReset() {
+    $("resetArea").replaceChildren(el("div", { class: "confirm" }, "本当にすべて消しますか？",
+      el("button", { class: "btn danger small", type: "button", onclick: () => { S = emptyState(); commit(); restoreReset(); } }, "消す"),
+      el("button", { class: "btn ghost small", type: "button", onclick: restoreReset }, "やめる")));
+  }
+  function restoreReset() {
+    $("resetArea").replaceChildren(el("button", { class: "btn danger", type: "button", onclick: askReset }, "すべて消す"));
+  }
+  $("resetBtn").addEventListener("click", askReset);
+
+  function showTab(name) {
+    for (const b of document.querySelectorAll(".tabs button")) b.setAttribute("aria-selected", String(b.dataset.tab === name));
+    for (const p of document.querySelectorAll("[data-panel]")) p.hidden = p.dataset.panel !== name;
+    try { localStorage.setItem("mayu-kakeibo-tab", name); } catch {}
+  }
+  document.querySelector(".tabs").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) showTab(b.dataset.tab); });
+  try { const t = localStorage.getItem("mayu-kakeibo-tab"); if (t) showTab(t); } catch {}
+
+  function load(raw) {
+    if (!raw || typeof raw !== "object") return;
+    S = Object.assign(emptyState(), raw);
+    for (const k of ["tx", "subs", "plans"]) if (!Array.isArray(S[k])) S[k] = [];
+  }
+
+  /* ---------- バックアップ ---------- */
+  const backupJSON = () => JSON.stringify({ app: "kakeibo", version: 1, savedAt: new Date().toISOString(), state: { ...S, sample: false } });
+  let backupMode = "";
+  $("downloadBtn").hidden = !window.KAKEIBO_STANDALONE;
+  $("exportBtn").addEventListener("click", async () => {
+    backupMode = "export";
+    const ta = $("backupText");
+    ta.hidden = false; ta.readOnly = true; ta.value = backupJSON();
+    $("importArea").hidden = true;
+    try { await navigator.clipboard.writeText(ta.value); $("backupMsg").textContent = "コピーしました。メモアプリなどに貼り付けて保存してね。"; }
+    catch { ta.focus(); ta.select(); $("backupMsg").textContent = "下の文字をすべて選んでコピーし、メモアプリなどに保存してね。"; }
+  });
+  $("downloadBtn").addEventListener("click", () => {
+    try {
+      const blob = new Blob([backupJSON()], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "kakeibo-backup-" + TODAY + ".json";
+      document.body.append(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+      $("backupMsg").textContent = "ファイルを保存しました。";
+    } catch { $("backupMsg").textContent = "ファイルに保存できませんでした。「書き出す」を使ってね。"; }
+  });
+  $("importBtn").addEventListener("click", () => {
+    backupMode = "import";
+    const ta = $("backupText");
+    ta.hidden = false; ta.readOnly = false; ta.value = ""; ta.placeholder = "書き出した文字をここに貼り付け"; ta.focus();
+    $("importArea").hidden = false;
+    $("backupMsg").textContent = "貼り付けて「このデータで上書きする」を押すと、今の記録が入れ替わります。";
+  });
+  $("importDo").addEventListener("click", () => {
+    let data;
+    try { data = JSON.parse($("backupText").value.trim()); } catch { $("backupMsg").textContent = "読み込めませんでした。書き出した文字を最初から最後まで全部貼り付けてね。"; return; }
+    const st = data && data.state ? data.state : data;
+    if (!st || !Array.isArray(st.tx) || !Array.isArray(st.subs) || !Array.isArray(st.plans)) { $("backupMsg").textContent = "家計簿のバックアップではないみたい。書き出した文字を貼り付けてね。"; return; }
+    load(st); S.sample = false; commit();
+    $("backupText").hidden = true; $("importArea").hidden = true;
+    $("backupMsg").textContent = `読み込みました（記録${S.tx.length}件・予定${S.plans.length}件・サブスク${S.subs.length}件）。`;
+  });
+
+  render();
+
+  /* ---------- 起動：保存先につなぐ ---------- */
+  (async () => {
+    try { const ls = localStorage.getItem(LS_KEY); if (ls) { load(JSON.parse(ls)); render(); } } catch {}
+    if (!window.claude || !window.claude.use) {
+      setSave("この端末に保存します");
+      try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch {}
+      return;
+    }
+    try {
+      const [db, user] = await Promise.all([window.claude.use("db"), window.claude.use("user")]);
+      const id = user ? await user.id() : null;
+      if (!db || !id) { setSave("この端末に保存します"); return; }
+      ref = db.doc("data/users/" + id + "/kakeibo");
+      const snap = await ref.get();
+      if (snap.exists && snap.data() && snap.data().state) { load(snap.data().state); render(); setSave("同期しました"); }
+      else setSave("");
+    } catch { ref = null; setSave("この端末に保存します"); }
+  })();
+})();
+</script>
+
+</body>
+</html>
